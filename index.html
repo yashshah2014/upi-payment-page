@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>UPI Payment</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      window.onload = function () {
-        // Replace with your actual UPI ID and amount
-        const upiLink = "upi://pay?pa=hettansh.23-5@okaxis&pn=Hettansh%20Shah&am=1000&cu=INR&tn=Trip%20Booking";
-        window.location.href = upiLink;
+<head>
+  <meta charset="UTF-8" />
+  <title>Pay Now</title>
+  <script>
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const amount = urlParams.get("amt") || "0";
+      const upiId = "hettansh.23-5@okaxis";
+      const name = "Hettansh Shah";
+      const note = "Trip Booking";
 
-        // Fallback if redirection fails
-        setTimeout(() => {
-          document.getElementById("fallback").style.display = "block";
-        }, 3000);
-      };
-    </script>
-  </head>
-  <body>
-    <h2>Redirecting to UPI Payment...</h2>
-    <p id="fallback" style="display:none;">
-      If you are not redirected, <a href="upi://pay?pa=hettansh.23-5@okaxis&pn=Hettansh%20Shah&am=1000&cu=INR&tn=Trip%20Booking">click here</a> to open the UPI payment link manually.
-    </p>
-  </body>
+      const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+      window.location.href = upiLink;
+
+      setTimeout(() => {
+        document.getElementById("fallback").innerHTML = `If you're not redirected, <a href="${upiLink}">click here to pay ₹${amount}</a>`;
+        document.getElementById("fallback").style.display = "block";
+      }, 3000);
+    };
+  </script>
+</head>
+<body>
+  <h2>Redirecting to UPI Payment...</h2>
+  <p id="fallback" style="display:none;"></p>
+</body>
 </html>
