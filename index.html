@@ -9,7 +9,7 @@
       const amount = urlParams.get("amt") || "0";
       const upiId = "hettansh.23-5@okaxis";
       const name = "Hettansh Shah";
-      const note = "Trip Booking";
+      const note = "Antrikshji Trip Booking";
 
       const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
       window.location.href = upiLink;
